@@ -37,7 +37,7 @@ const CardState = props => {
     const verifyCard = async(cardNumber) => {
         // call APi
         try{
-            const response = await axios.get(` https://card-scheme.herokuapp.com/api/v1/card-scheme/verify/${cardNumber}`);
+            const response = await axios.get(`https://card-scheme.herokuapp.com/api/v1/card-scheme/verify/${cardNumber}`);
             
             dispatch({
                 type: VERIFY_CARD,
@@ -70,6 +70,7 @@ const CardState = props => {
 
         
     }
+
     return (
         <CardContext.Provider 
             value= {{
