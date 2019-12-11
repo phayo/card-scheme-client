@@ -5,7 +5,8 @@ import cardReducer from './cardReducer';
 import { VERIFY_CARD, 
     GET_CARD_STATS, 
     VERIFY_CARD_ON_ERROR,
-    GET_CARD_STATS_ON_ERROR
+    GET_CARD_STATS_ON_ERROR,
+    SPINNER
  } from '../types';
 
 const CardState = props => {
@@ -28,6 +29,7 @@ const CardState = props => {
         },
         
         failure: "default",
+        spin: false
         
         
     }
@@ -35,6 +37,10 @@ const CardState = props => {
     const [state, dispatch] = useReducer(cardReducer, initialState);
 
     const verifyCard = async(cardNumber) => {
+        dispatch({
+            type: SPINNER,
+            payload: true
+        });
         // call APi
         try{
             const response = await axios.get(`https://card-scheme.herokuapp.com/api/v1/card-scheme/verify/${cardNumber}`);
@@ -53,6 +59,10 @@ const CardState = props => {
     }
 
     const getCardStats = async(start, limit) => {
+        dispatch({
+            type: SPINNER,
+            payload: true
+        });
         try{
             const response = await axios.get(` https://card-scheme.herokuapp.com/api/v1/card-scheme/stats?start=${start}&limit=${limit}`);
             
@@ -77,6 +87,7 @@ const CardState = props => {
                 failure: state.failure,
                 verify: state.verify,
                 stats: state.stats,
+                spin: state.spin,
                 verifyCard,
                 getCardStats
             }}

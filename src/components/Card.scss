@@ -344,3 +344,11 @@ input{
     }
   }
 }
+
+.spin{
+  position: absolute;
+  top: 42%;
+  left: 47%;
+  background-color: #70217a57;
+  z-index: 1000;
+}

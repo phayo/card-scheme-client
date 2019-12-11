@@ -1,12 +1,13 @@
 import React, {useContext, useState} from 'react'
 import './log.scss';
-import CardContext from '../context/card/cardContext'
+import CardContext from '../context/card/cardContext';
+import { AtomSpinner } from 'react-epic-spinners';
 
 
 export default function Logs() {
     const [startInput, setStartInput] = useState("");
     const [startLimit, setStartLimit] = useState("");
-    const {getCardStats, failure, stats} = useContext(CardContext);
+    const {getCardStats, failure, spin, stats} = useContext(CardContext);
     const {success, start, limit, size, payload} = stats;
     const hitArray = Object.keys(payload);
     const arr = hitArray.reduce((acc, item, index) => {        
@@ -42,6 +43,7 @@ export default function Logs() {
 
     return (
         <>
+            {spin && <AtomSpinner className="spin" color="#a7a1ac"/>}
             <div className="heading">
                 <h1>Card Verification Logs</h1>
                 <p>Enter page number and page limit</p>

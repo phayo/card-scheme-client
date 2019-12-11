@@ -1,16 +1,16 @@
 import React, {useContext, useState} from 'react';
 import './Card.scss';
-import CardContext from '../context/card/cardContext'
+import CardContext from '../context/card/cardContext';
+import { AtomSpinner } from 'react-epic-spinners';
 
 export default function CardVerification() {
     const [cardNumber, setCardNumber] = useState("");
-    const {verifyCard, failure, verify} = useContext(CardContext);
-    const {payload} = verify
+    const {verifyCard, failure, spin, verify} = useContext(CardContext);
+    const {payload} = verify;
     const {type, scheme, bank} = payload;
 
     function handleSubmit(e){
         e.preventDefault();
-        console.log(cardNumber);
         verifyCard(cardNumber);
         setCardNumber("");
     }
@@ -23,10 +23,13 @@ export default function CardVerification() {
     }
 
     return (
-        <>  
+        <>  {spin && <AtomSpinner className="spin" color="#a7a1ac"/>}
             <div className="heading">
                 <h1>Card Verification Service</h1>
                 <p>Enter your card number to get basic details about your card</p>
+                <h2 className="">
+                    Result : <span>{failure}</span>
+                </h2>
             </div> 
             <div className={`card card-${failure}`}>
                 <h4 className="scheme">{(type === undefined || type === null || type === "") ? "card scheme" : type}</h4>
@@ -56,9 +59,6 @@ export default function CardVerification() {
                 <button className="validate" type="button" onClick={handleSubmit}>Validate</button>
                 
             </div>
-            <h2 className="result">
-                Result : <span>{failure}</span>
-            </h2>
         </>
     )
 }

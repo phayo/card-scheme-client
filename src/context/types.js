@@ -2,3 +2,4 @@ export const VERIFY_CARD = "VERIFY_CARD";
 export const VERIFY_CARD_ON_ERROR = "VERIFY_CARD_ON_ERROR";
 export const GET_CARD_STATS = "GET_CARD_STATS";
 export const GET_CARD_STATS_ON_ERROR = "GET_CARD_STATS_ON_ERROR";
+export const SPINNER = "SPINNER";
